@@ -26,4 +26,4 @@ your preferred browser.
 
 My Hanh
 
-**Madison Company, Say Hi!**
+**MH, Say Hi!**
