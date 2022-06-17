@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,34 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.todo-item {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.MuiFormControlLabel-root {
+  min-width: 300px;
+}
+
+.input {
+  height: 32px;
+  padding: 0;
+  margin: 0;
+  min-width: 300px;
+  margin-right: 15px;
+}
+
+.MuiFormGroup-root {
+  margin-right: 15px;
+}
+
+.input-submit {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
 }
