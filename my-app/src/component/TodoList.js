@@ -33,26 +33,27 @@ export default function TodoList () {
       const isChecked = checked.includes(id);
       const storageJobs = JSON.parse(localStorage.getItem('jobs'));
       const job = storageJobs.find(job => job.id === id);
+      const listJob = storageJobs.map(item => item.id === id ? job : item);
+      
+      let result;
 
       if(isChecked) {
-          //uncheck
-          job.status = false;
-          const listJob = storageJobs.map(item => item.id === id ? job : item)
-          setJobs(listJob);
-          const jsonJobs = JSON.stringify(listJob);
-          localStorage.setItem('jobs', jsonJobs);
-          console.log(job);
+        //uncheck
+        job.status = false;
+        setJobs(listJob);
 
-          return checked.filter(item => item !== id)
-      } else {
-          job.status = true;
-          const listJob = storageJobs.map(item => item.id === id ? job : item);
-          const jsonJobs = JSON.stringify(listJob);
-          setJobs(listJob);
-          localStorage.setItem('jobs', jsonJobs);
-          console.log(job);
-          return [...prev, id];
-      }
+        result = checked.filter(item => item !== id)
+    } else {
+        //check
+        job.status = true;
+        setJobs(listJob);
+        result = [...prev, id];
+    }
+    
+    const jsonJobs = JSON.stringify(listJob);
+    localStorage.setItem('jobs', jsonJobs);
+
+    return result
     });
   }
 
