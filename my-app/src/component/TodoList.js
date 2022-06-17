@@ -30,39 +30,37 @@ export default function TodoList () {
 
     const handleCheck = (id) => {
       setChecked(prev => {
-      const isChecked = checked.includes(id);
-      const storageJobs = JSON.parse(localStorage.getItem('jobs'));
-      const job = storageJobs.find(job => job.id === id);
-      const listJob = storageJobs.map(item => item.id === id ? job : item);
-      
-      let result;
+        let result;
 
-      if(isChecked) {
-        //uncheck
-        job.status = false;
+        const isChecked = checked.includes(id);
+        const storageJobs = JSON.parse(localStorage.getItem('jobs'));
+        const job = storageJobs.find(job => job.id === id);
+        const listJob = storageJobs.map(item => item.id === id ? job : item);
         setJobs(listJob);
 
-        result = checked.filter(item => item !== id)
-    } else {
-        //check
-        job.status = true;
-        setJobs(listJob);
-        result = [...prev, id];
+        if(isChecked) {
+          //uncheck
+          job.status = false;
+          result = checked.filter(item => item !== id)
+        } else {
+          //check
+          job.status = true;
+          result = [...prev, id];
+        }
+
+        const jsonJobs = JSON.stringify(listJob);
+        localStorage.setItem('jobs', jsonJobs);
+
+        return result
+      });
     }
-    
-    const jsonJobs = JSON.stringify(listJob);
-    localStorage.setItem('jobs', jsonJobs);
 
-    return result
-    });
-  }
+    const removeJob = id => {
+        const arrRemove = [...jobs].filter(jobs => jobs.id !== id)
 
-  const removeJob = id => {
-      const arrRemove = [...jobs].filter(jobs => jobs.id !== id)
-
-      localStorage.setItem('jobs', JSON.stringify(arrRemove));
-      setJobs(arrRemove);
-  }
+        localStorage.setItem('jobs', JSON.stringify(arrRemove));
+        setJobs(arrRemove);
+    }
 
     return (
         <div className='container'>
